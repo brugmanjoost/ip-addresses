@@ -8,10 +8,12 @@ A javascript module to facilitate working with IP addresses
 5. [API](#api)<br />
 5.1 [Class: IPv4Address](#class-ipv4address)<br />
 &nbsp;&nbsp;&nbsp;&nbsp;5.1.1 [Property: value](#property-value)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;5.1.2 [Method: toString](#method-tostringuse3digits)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;5.1.3 [Method: toBin](#method-tobinseparator)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;5.1.4 [Method: toArray](#method-toarray)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;5.1.5 [Method: mask](#method-masksubnetmask)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;5.1.2 [Property: class](#property-class)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;5.1.3 [Property: private](#property-private)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;5.1.4 [Method: toString](#method-tostringuse3digits)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;5.1.5 [Method: toBin](#method-tobinseparator)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;5.1.6 [Method: toArray](#method-toarray)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;5.1.7 [Method: mask](#method-masksubnetmask)<br />
 5.2 [Class: IPv4Subnetmask](#class-ipv4subnetmask)<br />
 &nbsp;&nbsp;&nbsp;&nbsp;5.2.1 [Property: value](#property-value-1)<br />
 &nbsp;&nbsp;&nbsp;&nbsp;5.2.2 [Property: length](#property-length)<br />
@@ -196,6 +198,12 @@ This class represents an IPv4 address, typically defined by a single 32bit unsig
 
 #### Property: value
 Readonly. The 32bit unsigned integer that representst the address.
+
+#### Property: class
+Readonly. The class of the IP address, A through E.
+
+### Property: private
+Readonly. True if the IP address is in a private range. False otherwise.
 
 #### Method: toString(use3Digits)
 Returns the address in octet format, e.g. 192.168.1.1. If use3Digits is true toString() returns all octets left padded with zeros, e.g. 192.168.001.001.

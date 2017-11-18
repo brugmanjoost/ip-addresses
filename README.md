@@ -5,29 +5,31 @@ A javascript module to facilitate working with IP addresses
 2. [Installation](#installation)
 3. [Usage](#usage)<br />
 4. [API](#api)<br />
-4.1 [Class: IPv4Address](#class-IPv4Address)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.1.1 [Property: value](#class-IPv4Address-value)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.1.2 [Method: toString](#class-IPv4Address-toString)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.1.3 [Method: toBin](#class-IPv4Address-toBin)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.1.4 [Method: toArray](#class-IPv4Address-toArray)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.1.4 [Method: mask](#class-IPv4Address-mask)<br />
-4.2 [Class: IPv4Subnetmask](#class-IPv4Subnetmask)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.2.1 [Property: value](#class-IPv4Subnetmask-value)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.2.2 [Method: toString](#class-IPv4Subnetmask-toString)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.2.3 [Method: toBin](#class-IPv4Subnetmask-toBin)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.2.4 [Method: toArray](#class-IPv4Subnetmask-toArray)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.2.4 [Method: invert](#class-IPv4Subnetmask-invert)<br />
-4.3 [Class: IPv4Range](#class-IPv4Range)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.3.1 [Property: firstAddress](#class-IPv4Range-firstAddress)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.3.1 [Property: lastAddress](#class-IPv4Range-lastAddress)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.3.1 [Property: length](#class-IPv4Range-length)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.3.4 [Method: contains](#class-IPv4Range-contains)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.3.4 [Method: getIterator](#class-IPv4Range-getIterator)<br />
-4.4 [Class: IPv4Subnet](#class-IPv4Subnet)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.4.1 [Property: subnetMask](#class-IPv4Subnet-subnetMask)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.4.1 [Property: networkAddress](#class-IPv4Subnet-networkAddress)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.4.1 [Property: broadcastAddress](#class-IPv4Subnet-broadcastAddress)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.4.1 [Property: numberOfHosts](#class-IPv4Subnet-numberOfHosts)<br />
+4.1 [Class: IPv4Address](#class-ipv4address)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;4.1.1 [Property: value](#property-value)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;4.1.2 [Method: toString](#method-tostringuse3digits)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;4.1.3 [Method: toBin](#method-tobinseparator)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;4.1.4 [Method: toArray](#method-toarray)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;4.1.5 [Method: mask](#method-masksubnetmask)<br />
+4.2 [Class: IPv4Subnetmask](#class-ipv4subnetmask)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;4.2.1 [Property: value](#property-value-1)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;4.2.2 [Property: length](#property-length)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;4.2.3 [Method: toString](#method-tostringuse3digits-1)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;4.2.4 [Method: toBin](#method-tobinseparator-1)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;4.2.5 [Method: toArray](#method-toarray-1)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;4.2.6 [Method: invert](#method-invert)<br />
+4.3 [Class: IPv4Range](#class-ipv4range)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;4.3.1 [Property: firstAddress](#property-firstaddress)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;4.3.2 [Property: lastAddress](#property-lastaddress)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;4.3.3 [Property: length](#property-length-1)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;4.3.4 [Method: contains](#method-contains)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;4.3.5 [Method: getIterator](#method-getiterator)<br />
+4.4 [Class: IPv4Subnet](#class-ipv4subnet)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;4.4.1 [Property: subnetMask](#property-subnetmask)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;4.4.2 [Property: networkAddress](#property-networkaddress)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;4.4.3 [Property: broadcastAddress](#property-broadcastaddress)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;4.4.4 [Property: numberOfHosts](#property-numberofhosts)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;4.3.5 [Method: getHostsIterator](#method-gethostsiterator)<br />
 
 ## Introduction
 This module intends to facilitate working with IP addresses, currently v4 only.
@@ -67,7 +69,7 @@ console.log(ip1.toArray());      // yields [ 192, 168, 1, 1 ]
 This class represents an IPv4 address, typically defined by a single 32bit unsigned integer.
 
 #### Property: value
-Readonly. Returns the 32bit unsigned integer that representst the address.
+Readonly. The 32bit unsigned integer that representst the address.
 
 #### Method: toString(use3Digits)
 Returns the address in octet format, e.g. 192.168.1.1. If use3Digits is true toString() returns all octets left padded with zeros, e.g. 192.168.001.001.
@@ -85,7 +87,10 @@ Returns a new IPv4Address object with its address set to that of the original ad
 This class represents an IPv4 subnet mask, typically defined by a single 32bit unsigned integer.
 
 #### Property: value
-Readonly. Returns the 32bit unsigned integer that representst the mask.
+Readonly. The 32bit unsigned integer that representst the mask.
+
+#### Property: length
+Readonly. The length of the subnet mask (the number of 1's in the binary representation).
 
 #### Method: toString(use3Digits)
 Returns the mask in octet format, e.g. 255.255.255.0. If use3Digits is true toString() returns all octets left padded with zeros, e.g. 255.255.255.000.

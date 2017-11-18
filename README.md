@@ -28,7 +28,7 @@ A javascript module to facilitate working with IP addresses
 &nbsp;&nbsp;&nbsp;&nbsp;4.4.1 [Property: subnetMask](#property-subnetmask)<br />
 &nbsp;&nbsp;&nbsp;&nbsp;4.4.2 [Property: networkAddress](#property-networkaddress)<br />
 &nbsp;&nbsp;&nbsp;&nbsp;4.4.3 [Property: broadcastAddress](#property-broadcastaddress)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.4.4 [Property: numberOfHosts](#property-numberofhosts)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;4.4.4 [Property: hosts](#property-hosts)<br />
 &nbsp;&nbsp;&nbsp;&nbsp;4.3.5 [Method: getHostsIterator](#method-gethostsiterator)<br />
 
 ## Introduction
@@ -42,25 +42,110 @@ $ npm install ip-addresses
 ## Usage
 
 ### IPv4 Addresses
-Following are examples using an individual address:
 
 ```javascript
-let IPAdresses = require('ip-addresses');
+let IPAddresses = require('../index.js');
 
 // Create an IPv4 address
 let ip1 = IPAddresses.v4.address('192.168.1.1');
 let ip2 = IPAddresses.v4.address([192, 168, 1, 1]);
-let ip3 = IPAddresses.v4.fromAny(ip1); // creates a duplicate
+let ip3 = IPAddresses.v4.address(ip1); // creates a duplicate
 
-// Get the value for an address
-console.log(ip1.address());      // yields 3232235777
+// Get the value for an addres
+console.log(ip1.value);          // yields 3232235777
 console.log(ip1.toString());     // yields 192.168.1.1
 console.log(ip1.toString(true)); // yields 192.168.001.001
 console.log(ip1.toBin());        // yields 11000000101010000000000100000001
 console.log(ip1.toBin(' '));     // yields 11000000 10101000 00000001 00000001
 console.log(ip1.toBin('.'));     // yields 11000000.10101000.00000001.00000001
-console.log(ip1.toArray());      // yields [ 192, 168, 1, 1 ]
+console.log(ip1.toArray());      // yields [192,168,1,1]
+```
 
+### IPv4 Subnet masks
+
+```javascript
+let IPAddresses = require('../index.js');
+
+// Create an IPv4 subnet mask
+let sm1 = IPAddresses.v4.subnetmask('255.255.255.0');
+let sm2 = IPAddresses.v4.subnetmask([255, 255, 255, 0]);
+let sm3 = IPAddresses.v4.subnetmask(24);
+let sm4 = IPAddresses.v4.subnetmask(sm1); // creates a duplicate
+
+// Get the value for an addres
+console.log(sm1.value);          // yields 4294967040
+console.log(sm1.toString());     // yields 255.255.255.0
+console.log(sm1.toString(true)); // yields 255.255.255.000
+console.log(sm1.toBin());        // yields 11111111111111111111111100000000
+console.log(sm1.toBin(' '));     // yields 11111111 11111111 11111111 00000000
+console.log(sm1.toBin('.'));     // yields 11111111.11111111.11111111.00000000
+console.log(sm1.toArray());      // yields [255,255,255,0]
+console.log(sm1.length);         // yields 24
+```
+
+### IPv4 Ranges
+
+```javascript
+let IPAddresses = require('../index.js');
+
+// Create an IPv4 range
+let range1 = IPAddresses.v4.range('192.168.1.10-192.168.1.19');
+let range2 = IPAddresses.v4.range(range1); // creates a duplicate
+
+// Get the value for an addres
+console.log(range1.firstAddress.toString());  // yields 192.168.1.10
+console.log(range1.lastAddress.toString());   // yields 192.168.1.19
+console.log(range1.length);                   // yields 10
+console.log(range1.contains('192.168.1.9'));  // yields false
+console.log(range1.contains('192.168.1.11')); // yields true
+
+let iterator = range1.getIterator();
+let item;
+while(!((item = iterator.next()).done))
+    console.log(item.value.toString());
+// yields 192.168.1.10
+// yields 192.168.1.11
+// yields 192.168.1.12
+// yields 192.168.1.13
+// yields 192.168.1.14
+// yields 192.168.1.15
+// yields 192.168.1.16
+// yields 192.168.1.17
+// yields 192.168.1.18
+// yields 192.168.1.19
+```
+
+### IPv4 Subnet masks
+
+```javascript
+let IPAddresses = require('../index.js');
+
+// Create an IPv4 range
+let sn1 = IPAddresses.v4.subnet('192.168.1.10/24');
+let sn2 = IPAddresses.v4.subnet('192.168.1.10/255.255.255.0');
+let sn3 = IPAddresses.v4.range(sn1); // creates a duplicate
+
+// Get the value for an addres
+console.log(sn1.firstAddress.toString());      // yields 192.168.1.0
+console.log(sn1.networkAddress.toString());    // yields 192.168.1.0
+console.log(sn1.lastAddress.toString());       // yields 192.168.1.255
+console.log(sn1.broadcastAddress.toString());  // yields 192.168.1.255
+console.log(sn1.length);                       // yields 256
+console.log(sn1.hosts);                        // yields 254
+console.log(sn1.contains('192.168.2.9'));      // yields false
+console.log(sn1.contains('192.168.1.11'));     // yields true
+
+let iterator = sn1.getHostsIterator();
+let item;
+while(!((item = iterator.next()).done))
+    console.log(item.value.toString());
+// yields 192.168.1.1
+// yields 192.168.1.2
+// yields 192.168.1.3
+// ...
+// yields 192.168.1.252
+// yields 192.168.1.253
+// yields 192.168.1.254
 ```
 
 ## API
@@ -144,7 +229,7 @@ Readonly. An IPv4Address that specifies the network address of the subnet. This 
 #### Property: broadcastAddress
 Readonly. An IPv4Address that specifies the broadcast address of the subnet. This is identical to lastAddress.
 
-#### Property: numberOfHosts
+#### Property: hosts
 Readonly. The number of hosts present in the subnet. This is always equal to length - 2.
 
 #### Method: getHostsIterator()

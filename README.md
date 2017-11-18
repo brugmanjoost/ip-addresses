@@ -101,7 +101,7 @@ console.log(range1.contains('192.168.1.11')); // yields true
 
 let iterator = range1.getIterator();
 let item;
-while(!((item = iterator.next()).done))
+while(!(item = iterator.next()).done)
     console.log(item.value.toString());
 // yields 192.168.1.10
 // yields 192.168.1.11
@@ -137,7 +137,7 @@ console.log(sn1.contains('192.168.1.11'));     // yields true
 
 let iterator = sn1.getHostsIterator();
 let item;
-while(!((item = iterator.next()).done))
+while(!(item = iterator.next()).done)
     console.log(item.value.toString());
 // yields 192.168.1.1
 // yields 192.168.1.2
@@ -208,13 +208,10 @@ Returns true if the given ip address is inside the range. false otherwise. The i
 Returns an ES6 Generator object to iterate over all addresses in the range. Used like so to list all hosts in the 192.168.1.0 subnet:
 
 ```javascript
-let IPAdresses = require('ip-addresses');
-
-let range = IPAddresses.v4.range('192.168.1.1-192.168.1.254');
-let iterator = range.getIterator();
-while(!(let item = iterator.next()).done)
+let iterator = range1.getIterator();
+let item;
+while(!(item = iterator.next()).done)
     console.log(item.value.toString());
-
 ```
 
 ### Class: IPv4Subnet

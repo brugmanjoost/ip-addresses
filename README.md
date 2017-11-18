@@ -3,33 +3,34 @@ A javascript module to facilitate working with IP addresses
 
 1. [Introduction](#introduction)
 2. [Installation](#installation)
-3. [Usage](#usage)<br />
-4. [API](#api)<br />
-4.1 [Class: IPv4Address](#class-ipv4address)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.1.1 [Property: value](#property-value)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.1.2 [Method: toString](#method-tostringuse3digits)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.1.3 [Method: toBin](#method-tobinseparator)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.1.4 [Method: toArray](#method-toarray)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.1.5 [Method: mask](#method-masksubnetmask)<br />
-4.2 [Class: IPv4Subnetmask](#class-ipv4subnetmask)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.2.1 [Property: value](#property-value-1)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.2.2 [Property: length](#property-length)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.2.3 [Method: toString](#method-tostringuse3digits-1)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.2.4 [Method: toBin](#method-tobinseparator-1)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.2.5 [Method: toArray](#method-toarray-1)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.2.6 [Method: invert](#method-invert)<br />
-4.3 [Class: IPv4Range](#class-ipv4range)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.3.1 [Property: firstAddress](#property-firstaddress)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.3.2 [Property: lastAddress](#property-lastaddress)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.3.3 [Property: length](#property-length-1)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.3.4 [Method: contains](#method-contains)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.3.5 [Method: getIterator](#method-getiterator)<br />
-4.4 [Class: IPv4Subnet](#class-ipv4subnet)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.4.1 [Property: subnetMask](#property-subnetmask)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.4.2 [Property: networkAddress](#property-networkaddress)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.4.3 [Property: broadcastAddress](#property-broadcastaddress)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.4.4 [Property: hosts](#property-hosts)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;4.3.5 [Method: getHostsIterator](#method-gethostsiterator)<br />
+3. [Usage](#usage)
+4. [Errors](#errors)
+5. [API](#api)
+5.1 [Class: IPv4Address](#class-ipv4address)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;5.1.1 [Property: value](#property-value)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;5.1.2 [Method: toString](#method-tostringuse3digits)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;5.1.3 [Method: toBin](#method-tobinseparator)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;5.1.4 [Method: toArray](#method-toarray)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;5.1.5 [Method: mask](#method-masksubnetmask)<br />
+5.2 [Class: IPv4Subnetmask](#class-ipv4subnetmask)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;5.2.1 [Property: value](#property-value-1)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;5.2.2 [Property: length](#property-length)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;5.2.3 [Method: toString](#method-tostringuse3digits-1)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;5.2.4 [Method: toBin](#method-tobinseparator-1)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;5.2.5 [Method: toArray](#method-toarray-1)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;5.2.6 [Method: invert](#method-invert)<br />
+5.3 [Class: IPv4Range](#class-ipv4range)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;5.3.1 [Property: firstAddress](#property-firstaddress)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;5.3.2 [Property: lastAddress](#property-lastaddress)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;5.3.3 [Property: length](#property-length-1)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;5.3.4 [Method: contains](#method-contains)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;5.3.5 [Method: getIterator](#method-getiterator)<br />
+5.4 [Class: IPv4Subnet](#class-ipv4subnet)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;5.4.1 [Property: subnetMask](#property-subnetmask)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;5.4.2 [Property: networkAddress](#property-networkaddress)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;5.4.3 [Property: broadcastAddress](#property-broadcastaddress)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;5.4.4 [Property: hosts](#property-hosts)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;5.3.5 [Method: getHostsIterator](#method-gethostsiterator)<br />
 
 ## Introduction
 This module intends to facilitate working with IP addresses, currently v4 only.
@@ -42,6 +43,7 @@ $ npm install ip-addresses
 ## Usage
 
 ### IPv4 Addresses
+All IPv4Address instances are created through IPAddresses.ipv4.address().
 
 ```javascript
 let IPAddresses = require('../index.js');
@@ -59,16 +61,10 @@ console.log(ip1.toBin());               // yields 110000001010100000000001000000
 console.log(ip1.toBin(' '));            // yields 11000000 10101000 00000001 00000001
 console.log(ip1.toBin('.'));            // yields 11000000.10101000.00000001.00000001
 console.log(ip1.toArray());             // yields [192,168,1,1]
-
-try {
-    let ip0 = IPAddresses.v4.address('192.168.1');
-}
-catch(e) {
-    console.log(e.constructor.name);    // yields IPv4AddressError
-}
 ```
 
 ### IPv4 Subnet masks
+All IPv4Subnetmask instances are created through IPAddresses.ipv4.subnetmask().
 
 ```javascript
 let IPAddresses = require('../index.js');
@@ -88,16 +84,10 @@ console.log(sm1.toBin(' '));     // yields 11111111 11111111 11111111 00000000
 console.log(sm1.toBin('.'));     // yields 11111111.11111111.11111111.00000000
 console.log(sm1.toArray());      // yields [255,255,255,0]
 console.log(sm1.length);         // yields 24
-
-try {
-    let sm0 = IPAddresses.v4.subnetmask('255.255.255.1');
-}
-catch(e) {
-    console.log(e.constructor.name);    // yields IPv4SubnetmaskError
-}
 ```
 
 ### IPv4 Ranges
+All IPv4Range instances are created through IPAddresses.ipv4.range().
 
 ```javascript
 let IPAddresses = require('../index.js');
@@ -127,16 +117,10 @@ while(!(item = iterator.next()).done)
 // yields 192.168.1.17
 // yields 192.168.1.18
 // yields 192.168.1.19
-
-try {
-    let sm0 = IPAddresses.v4.range('192.168.1.0-192.168.1.2.3');
-}
-catch(e) {
-    console.log(e.constructor.name);    // yields IPv4RangeError
-}
 ```
 
 ### IPv4 Subnets
+All IPv4Subnet instances are created through IPAddresses.ipv4.subnet().
 
 ```javascript
 let IPAddresses = require('../index.js');
@@ -167,13 +151,42 @@ while(!(item = iterator.next()).done)
 // yields 192.168.1.252
 // yields 192.168.1.253
 // yields 192.168.1.254
+```
+
+## Errors
+The API throws IPv4Error objects during the creation of new instances if the specification for a new address, subnet mask, range or subnet is invalid. IPv4Error is an extention of Error. IPv4Error is further extended into IPv4AddressError, IPv4SubnetmaskError, IPv4RangeError and IPv4SubnetError.
+
+```javascript
+let IPAddresses = require('../index.js');
 
 try {
-    let ip0 = IPAddresses.v4.subnet('192.168.1.1/65');
+    let ip0 = IPAddresses.v4.address('192.168.1');
+}
+catch(e) {
+    console.log(e.constructor.name);    // yields IPv4AddressError
+}
+
+try {
+    let sm0 = IPAddresses.v4.subnetmask('255.255.255.1');
+}
+catch(e) {
+    console.log(e.constructor.name);    // yields IPv4SubnetmaskError
+}
+
+try {
+    let range0 = IPAddresses.v4.range('192.168.1.0-192.168.1.2.3');
+}
+catch(e) {
+    console.log(e.constructor.name);    // yields IPv4RangeError
+}
+
+try {
+    let sn0 = IPAddresses.v4.subnet('192.168.1.1/65');
 }
 catch(e) {
     console.log(e.constructor.name);    // yields IPv4SubnetError
 }
+
 ```
 
 ## API

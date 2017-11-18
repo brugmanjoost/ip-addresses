@@ -35,7 +35,7 @@ A javascript module to facilitate working with IP addresses
 &nbsp;&nbsp;&nbsp;&nbsp;5.3.5 [Method: getHostsIterator](#method-gethostsiterator)<br />
 
 ## Introduction
-This module intends to facilitate working with IP addresses, currently v4 only.
+This module facilitates working with IP addresses (v4 only).
 
 ## Installation
 ```sh

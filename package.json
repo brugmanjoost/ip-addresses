@@ -1,0 +1,23 @@
+{
+  "name": "ip-addresses",
+  "version": "1.0.0",
+  "description": "An ES6 module to facilitate working with IP addresses, ranges, subnets and iterations.",
+  "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brugmanjoost/ip-addresses.git"
+  },
+  "author": "Joost Brugman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brugmanjoost/ip-addresses/issues"
+  },
+  "homepage": "https://github.com/brugmanjoost/ip-addresses#readme"
+}

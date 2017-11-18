@@ -51,9 +51,6 @@ All IPv4Address instances are created through IPAddresses.ipv4.address().
 let IPAddresses = require('../index.js');
 
 // Create an IPv4 address
-let IPAddresses = require('../index.js');
-
-// Create an IPv4 address
 let ip1 = IPAddresses.v4.address('192.168.1.1');
 let ip2 = IPAddresses.v4.address([192, 168, 1, 1]);
 let ip3 = IPAddresses.v4.address(ip1); // creates a duplicate

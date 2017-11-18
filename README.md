@@ -1,5 +1,5 @@
 # ip-addresses
-A javascript module to facilitate working with IP addresses
+A javascript module to facilitate working with IP addresses, ranges and subnets (v4).
 
 1. [Introduction](#introduction)
 2. [Installation](#installation)

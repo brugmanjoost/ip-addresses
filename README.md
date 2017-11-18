@@ -5,7 +5,7 @@ A javascript module to facilitate working with IP addresses
 2. [Installation](#installation)
 3. [Usage](#usage)
 4. [Errors](#errors)
-5. [API](#api)
+5. [API](#api)<br />
 5.1 [Class: IPv4Address](#class-ipv4address)<br />
 &nbsp;&nbsp;&nbsp;&nbsp;5.1.1 [Property: value](#property-value)<br />
 &nbsp;&nbsp;&nbsp;&nbsp;5.1.2 [Method: toString](#method-tostringuse3digits)<br />

@@ -52,13 +52,20 @@ let ip2 = IPAddresses.v4.address([192, 168, 1, 1]);
 let ip3 = IPAddresses.v4.address(ip1); // creates a duplicate
 
 // Get the value for an addres
-console.log(ip1.value);          // yields 3232235777
-console.log(ip1.toString());     // yields 192.168.1.1
-console.log(ip1.toString(true)); // yields 192.168.001.001
-console.log(ip1.toBin());        // yields 11000000101010000000000100000001
-console.log(ip1.toBin(' '));     // yields 11000000 10101000 00000001 00000001
-console.log(ip1.toBin('.'));     // yields 11000000.10101000.00000001.00000001
-console.log(ip1.toArray());      // yields [192,168,1,1]
+console.log(ip1.value);                 // yields 3232235777
+console.log(ip1.toString());            // yields 192.168.1.1
+console.log(ip1.toString(true));        // yields 192.168.001.001
+console.log(ip1.toBin());               // yields 11000000101010000000000100000001
+console.log(ip1.toBin(' '));            // yields 11000000 10101000 00000001 00000001
+console.log(ip1.toBin('.'));            // yields 11000000.10101000.00000001.00000001
+console.log(ip1.toArray());             // yields [192,168,1,1]
+
+try {
+    let ip0 = IPAddresses.v4.address('192.168.1');
+}
+catch(e) {
+    console.log(e.constructor.name);    // yields IPv4AddressError
+}
 ```
 
 ### IPv4 Subnet masks
@@ -81,6 +88,13 @@ console.log(sm1.toBin(' '));     // yields 11111111 11111111 11111111 00000000
 console.log(sm1.toBin('.'));     // yields 11111111.11111111.11111111.00000000
 console.log(sm1.toArray());      // yields [255,255,255,0]
 console.log(sm1.length);         // yields 24
+
+try {
+    let sm0 = IPAddresses.v4.subnetmask('255.255.255.1');
+}
+catch(e) {
+    console.log(e.constructor.name);    // yields IPv4SubnetmaskError
+}
 ```
 
 ### IPv4 Ranges
@@ -113,9 +127,16 @@ while(!(item = iterator.next()).done)
 // yields 192.168.1.17
 // yields 192.168.1.18
 // yields 192.168.1.19
+
+try {
+    let sm0 = IPAddresses.v4.range('192.168.1.0-192.168.1.2.3');
+}
+catch(e) {
+    console.log(e.constructor.name);    // yields IPv4RangeError
+}
 ```
 
-### IPv4 Subnet masks
+### IPv4 Subnets
 
 ```javascript
 let IPAddresses = require('../index.js');
@@ -146,6 +167,13 @@ while(!(item = iterator.next()).done)
 // yields 192.168.1.252
 // yields 192.168.1.253
 // yields 192.168.1.254
+
+try {
+    let ip0 = IPAddresses.v4.subnet('192.168.1.1/65');
+}
+catch(e) {
+    console.log(e.constructor.name);    // yields IPv4SubnetError
+}
 ```
 
 ## API

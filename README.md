@@ -256,7 +256,7 @@ while(!(item = iterator.next()).done)
 ```
 
 ### Class: IPv4Subnet
-This is an extention of IPv4Range with specific data to represent a subnet. All properties and methods() available 
+This is an extention of IPv4Range with specific data to represent a subnet. All properties and methods from IPv4Range are available.
 
 #### Property: subnetMask
 Readonly. An IPv4Subnetmask that specifies the mask used for this subnet.
